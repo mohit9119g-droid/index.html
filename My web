@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coder Pro Demo</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#eef2f3;
+    text-align:center;
+}
+
+.box{
+    background:white;
+    width:90%;
+    max-width:380px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px #999;
+}
+
+input{
+    width:90%;
+    padding:8px;
+    margin:6px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.correct{background:green;color:white;}
+.wrong{background:red;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="form">
+<h2>Student Details</h2>
+
+<input value="Mohit Kucher" disabled>
+<input value="Age: 14 Years" disabled>
+<input value="Class: 8" disabled>
+<input value="Diamonds Academy Shiksha" disabled>
+
+<br><br>
+<button onclick="start()">Enter Here</button>
+</div>
+
+<div class="box" id="quiz" style="display:none;">
+<h2 id="q"></h2>
+<div id="opt"></div>
+<br>
+<button onclick="next()">Next</button>
+</div>
+
+<script>
+let i=0;
+let quiz=[
+ {q:"2 + 2 = ?", a:[3,4,5], c:1},
+ {q:"6 - 2 = ?", a:[3,4,5], c:1},
+ {q:"5 + 3 = ?", a:[7,8,9], c:1}
+];
+
+function start(){
+ document.getElementById("form").style.display="none";
+ document.getElementById("quiz").style.display="block";
+ load();
+}
+
+function load(){
+ let x=quiz[i];
+ document.getElementById("q").innerText=x.q;
+ let h="";
+ x.a.forEach((v,n)=>{
+  h+=`<button onclick="check(this,${n})">${v}</button><br>`;
+ });
+ document.getElementById("opt").innerHTML=h;
+}
+
+function check(b,n){
+ document.querySelectorAll("#opt button").forEach(x=>x.disabled=true);
+ if(n==quiz[i].c) b.className="correct";
+ else b.className="wrong";
+}
+
+function next(){
+ i++;
+ if(i<quiz.length) load();
+ else alert("Demo Finished 😎 I am a Coder Pro");
+}
+</script>
+
+</body>
+</html>
